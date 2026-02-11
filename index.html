@@ -15,7 +15,7 @@
     }
     .container { max-width: 760px; margin: 0 auto; }
 
-    .menu {
+    .menu, .submenu {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -88,23 +88,13 @@
       margin: 16px 0;
     }
 
-    ul {
-      padding-left: 0;
-      margin: 0;
+    ol {
+      padding-left: 24px;
+      margin: 12px 0;
     }
 
     li {
-      margin: 10px 0;
-      padding-left: 24px;
-      position: relative;
-    }
-
-    li:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #0066cc;
-      font-size: 1.3em;
+      margin: 8px 0;
     }
 
     .example {
@@ -114,16 +104,25 @@
       padding: 16px;
       margin: 16px 0;
       font-size: 15px;
+      white-space: pre-wrap;
+    }
+
+    .checklist ol {
+      list-style: none;
+      padding-left: 0;
     }
 
     .checklist li {
       padding-left: 32px;
+      position: relative;
+      margin: 12px 0;
     }
 
     .checklist li:before {
       content: "☐";
-      left: 4px;
-      font-size: 1.1em;
+      position: absolute;
+      left: 0;
+      font-size: 1.2em;
     }
   </style>
 </head>
@@ -131,7 +130,7 @@
 
 <div class="container">
 
-  <!-- STARTMENY -->
+  <!-- HUVUDMENY -->
   <div id="menu" class="menu">
     <div class="card" onclick="show('info')">Info att ta</div>
     <div class="card" onclick="show('exempel')">Exempel anteckning</div>
@@ -139,12 +138,21 @@
     <div class="card" onclick="show('avsluta')">Gör detta när du är färdig</div>
   </div>
 
-  <!-- INFO ATT TA -->
+  <!-- INFO ATT TA → väljer lead-typ -->
   <div id="info" class="section">
-    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <button class="back-btn" onclick="backToMain()">⬅ Till start</button>
     <h1>Info att ta</h1>
+    <div class="submenu">
+      <div class="card" onclick="show('solcell')">Solcells / Sol+batteri lead</div>
+      <div class="card" onclick="show('batteri')">Batteri lead</div>
+    </div>
+  </div>
 
-    <h2>Solcells / Sol+batteri lead</h2>
+  <!-- SOLCELL / SOL+BATTERI -->
+  <div id="solcell" class="section">
+    <button class="back-btn" onclick="backToInfo()">⬅ Tillbaka</button>
+    <h1>Solcells / Sol+batteri lead</h1>
+
     <p><strong>Ta kontroll info</strong></p>
     <ol>
       <li>Hur många fastighetsägare?</li>
@@ -166,8 +174,13 @@
       Viktigast av allt:<br>
       10. Kom överens om ett 2 timmars spann bolagen kan ringa upp på (max 7 dagar fram i tiden)
     </div>
+  </div>
 
-    <h2>Batteri lead</h2>
+  <!-- BATTERI LEAD -->
+  <div id="batteri" class="section">
+    <button class="back-btn" onclick="backToInfo()">⬅ Tillbaka</button>
+    <h1>Batteri lead</h1>
+
     <p><strong>Ta kontroll info:</strong></p>
     <ol>
       <li><em>Hur många fastighetsägare?</em></li>
@@ -193,23 +206,26 @@
 
   <!-- EXEMPEL ANTECKNING -->
   <div id="exempel" class="section">
-    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <button class="back-btn" onclick="backToMain()">⬅ Till start</button>
     <h1>Exempel anteckning</h1>
     <div class="example">
-      Kontakta: 20/11, 14:00-16:00.<br>
-      Kommentar: Intresserad av batteri.<br><br>
-      Anders har installerat solceller för några år sedan och är överlag nöjd. Har inte installerat batteri i och med att han inte fått ihop det tidigare. Vi pratade om stödtjänster och effektavgifter vilket gjorde honom intresserad. Hade en del frågor om hur han skulle göra med ansökan om grönt avdrag och antalet fastighetsägare då han hade problem med det förra gången. Var kluven på om han behövde större än 15kWh, då han drar väldigt mycket el under vintern med en värmepump.<br><br>
-      Vill överlag se förslag på ett schysst batteri med bra avkastning. Var viktigt att kalkylen skulle se bra ut.<br><br>
-      Säkring: 20A<br>
-      Årlig produktion: 16.000kWh<br>
-      Installerad effekt: 18,5kWp<br>
-      Årlig förbrukning: 20.000kWh
+Kontakta: 20/11, 14:00-16:00.
+Kommentar: Intresserad av batteri.
+
+Anders har installerat solceller för några år sedan och är överlag nöjd. Har inte installerat batteri i och med att han inte fått ihop det tidigare. Vi pratade om stödtjänster och effektavgifter vilket gjorde honom intresserad. Hade en del frågor om hur han skulle göra med ansökan om grönt avdrag och antalet fastighetsägare då han hade problem med det förra gången. Var kluven på om han behövde större än 15kWh, då han drar väldigt mycket el under vintern med en värmepump.
+
+Vill överlag se förslag på ett schysst batteri med bra avkastning. Var viktigt att kalkylen skulle se bra ut.
+
+Säkring: 20A
+Årlig produktion: 16.000kWh
+Installerad effekt: 18,5kWp
+Årlig förbrukning: 20.000kWh
     </div>
   </div>
 
   <!-- BRA ATT VETA -->
   <div id="bra" class="section">
-    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <button class="back-btn" onclick="backToMain()">⬅ Till start</button>
     <h1>Bra att veta</h1>
 
     <h2>Lutningar</h2>
@@ -255,7 +271,7 @@
 
   <!-- GÖR DETTA NÄR DU ÄR FÄRDIG -->
   <div id="avsluta" class="section">
-    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <button class="back-btn" onclick="backToMain()">⬅ Till start</button>
     <h1>Gör detta när du är färdig</h1>
     <div class="checklist">
       <ol>
@@ -281,9 +297,15 @@ function show(id) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function back() {
+function backToMain() {
   document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
   document.getElementById('menu').style.display = 'flex';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function backToInfo() {
+  document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
+  document.getElementById('info').style.display = 'block';
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
