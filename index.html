@@ -1,215 +1,292 @@
-```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anteckningsmanual</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f4f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        #start {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        .section {
-            display: none;
-            padding: 20px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .back-btn {
-            display: block;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        .back-btn:hover {
-            background: #0056b3;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        h2 {
-            font-size: 20px;
-            margin: 10px 0;
-            cursor: pointer;
-            padding: 10px;
-            background: #e9ecef;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
-        h2:hover {
-            background: #dee2e6;
-        }
-        .content {
-            display: none;
-            padding: 15px;
-            border-left: 4px solid #ddd;
-            margin-bottom: 15px;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-        }
-        input[type="checkbox"] {
-            margin-right: 10px;
-            transform: scale(1.3);
-        }
-        .important {
-            color: #dc3545; /* Röd för viktigt */
-            font-weight: bold;
-        }
-        .info {
-            color: #007bff; /* Blå för info */
-        }
-        .checklist {
-            color: #28a745; /* Grön för checklista */
-        }
-        .highlight {
-            background: #fff3cd;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ffeeba;
-            margin: 10px 0;
-        }
-        .example-box {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            margin: 15px 0;
-        }
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manual – Mötesbokning</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #f5f7fa;
+      color: #222;
+      line-height: 1.55;
+    }
+    .container { max-width: 760px; margin: 0 auto; }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 600;
+      transition: all 0.18s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+
+    .section {
+      display: none;
+      background: white;
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .back-btn {
+      background: #0066cc;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: background 0.2s;
+    }
+
+    .back-btn:hover { background: #0055b3; }
+
+    h1 {
+      font-size: 22px;
+      margin: 0 0 18px;
+      color: #1a3c5e;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 24px 0 10px;
+      color: #004080;
+    }
+
+    .super-viktigt {
+      color: #c41e3a;
+      font-weight: 700;
+      margin-top: 1.4em;
+    }
+
+    .viktigast {
+      color: #b22222;
+      font-weight: 800;
+      background: #fff5f5;
+      padding: 10px 14px;
+      border-left: 5px solid #c41e3a;
+      border-radius: 6px;
+      margin: 16px 0;
+    }
+
+    ul {
+      padding-left: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 10px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0066cc;
+      font-size: 1.3em;
+    }
+
+    .example {
+      background: #f8f9fa;
+      border: 1px solid #e0e4e8;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      font-size: 15px;
+    }
+
+    .checklist li {
+      padding-left: 32px;
+    }
+
+    .checklist li:before {
+      content: "☐";
+      left: 4px;
+      font-size: 1.1em;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div id="start">
-            <div class="card" onclick="showSection('section1')">1️⃣ ❗ Info att ta</div>
-            <div class="card" onclick="showSection('section2')">2️⃣ Exempel Anteckning</div>
-            <div class="card" onclick="showSection('section3')">3️⃣ Bra att veta</div>
-            <div class="card" onclick="showSection('section4')">4️⃣ ❗ Gör detta när du avslutat samtalet</div>
-        </div>
 
-        <div id="section1" class="section">
-            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
-            <h1 class="important">❗ Info att ta</h1>
-            <h2 onclick="toggleContent(this)">Underhuvudrubrik 1 (exempel)</h2>
-            <div class="content">
-                <p>Info text här.</p>
-                <ul class="info">
-                    <li>Info punkt 1</li>
-                    <li>Info punkt 2</li>
-                </ul>
-            </div>
-            <!-- Lägg till fler underrubriker efter behov -->
-        </div>
+<div class="container">
 
-        <div id="section2" class="section">
-            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
-            <h1>2️⃣ Exempel Anteckning</h1>
-            <div class="example-box">
-                <p>Exempeltext för anteckning här.</p>
-            </div>
-            <h2 onclick="toggleContent(this)">Exempel underrubrik</h2>
-            <div class="content">
-                <p>Mer detaljer.</p>
-            </div>
-        </div>
+  <!-- STARTMENY -->
+  <div id="menu" class="menu">
+    <div class="card" onclick="show('info')">Info att ta</div>
+    <div class="card" onclick="show('exempel')">Exempel anteckning</div>
+    <div class="card" onclick="show('bra')">Bra att veta</div>
+    <div class="card" onclick="show('avsluta')">Gör detta när du är färdig</div>
+  </div>
 
-        <div id="section3" class="section">
-            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
-            <h1>3️⃣ Bra att veta</h1>
-            <h2 onclick="toggleContent(this)">Bra info 1</h2>
-            <div class="content">
-                <ul>
-                    <li>Bra punkt</li>
-                </ul>
-            </div>
-        </div>
+  <!-- INFO ATT TA -->
+  <div id="info" class="section">
+    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <h1>Info att ta</h1>
 
-        <div id="section4" class="section">
-            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
-            <h1 class="important">❗ Gör detta när du avslutat samtalet</h1>
-            <h2 onclick="toggleContent(this)">Checklista efter samtal</h2>
-            <div class="content">
-                <ul class="checklist">
-                    <li><input type="checkbox"> Steg 1</li>
-                    <li><input type="checkbox"> Steg 2</li>
-                </ul>
-                <div class="highlight important">Super viktigt: Kom ihåg detta!</div>
-            </div>
-        </div>
+    <h2>Solcells / Sol+batteri lead</h2>
+    <p><strong>Ta kontroll info</strong></p>
+    <ol>
+      <li>Hur många fastighetsägare?</li>
+      <li>Storlek på säkring?</li>
+      <li>Årliga förbrukning? – i kWh</li>
+      <li>Taktyp? – falsad plåt, tegel, betong?</li>
+      <li>Ålder på tak? – ungefärlig</li>
+      <li>Lutar taket lätt, vanligt eller brant?</li>
+    </ol>
+
+    <p class="super-viktigt">Super viktigt:</p>
+    <ol start="7">
+      <li>Dubbelkolla adressen</li>
+      <li>Fråga om numret du ringt till är samma som bolagen kan nå personen på.</li>
+      <li>Ta email adressen<br><small>Ifall kunden jiddrar om mail; det är för att personen i fråga ska få förslagen på mail efteråt</small></li>
+    </ol>
+
+    <div class="viktigast">
+      Viktigast av allt:<br>
+      10. Kom överens om ett 2 timmars spann bolagen kan ringa upp på (max 7 dagar fram i tiden)
     </div>
 
-    <script>
-        function showSection(id) {
-            document.getElementById('start').style.display = 'none';
-            document.getElementById(id).style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    <h2>Batteri lead</h2>
+    <p><strong>Ta kontroll info:</strong></p>
+    <ol>
+      <li><em>Hur många fastighetsägare?</em></li>
+      <li><em>Storlek på säkringen?</em></li>
+      <li><em>Vad har de för installerad effekt på anläggningen?</em><br>– Alternativt: Hur många paneler och ungefärligt årtal.</li>
+      <li><em>Vad producerar deras anläggning per år? – i kWh</em></li>
+      <li><em>Årlig förbrukning. – i kWh</em></li>
+    </ol>
 
-        function backToStart() {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(sec => sec.style.display = 'none');
-            document.getElementById('start').style.display = 'grid';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    <p class="super-viktigt">Super viktigt:</p>
+    <ol start="6">
+      <li><em>Dubbelkolla adressen</em></li>
+      <li><em>Fråga om numret du ringt till är samma som bolagen kan nå personen på.</em></li>
+      <li><em>Ta email adressen</em><br><small>Ifall kunden jiddrar om mail; det är för att personen i fråga ska få förslagen på mail efteråt</small></li>
+    </ol>
 
-        function toggleContent(header) {
-            const content = header.nextElementSibling;
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-            } else {
-                content.style.display = 'block';
-            }
-        }
-    </script>
+    <div class="viktigast">
+      Viktigast av allt:<br>
+      9. Kom överens om ett 2 timmars spann bolagen kan ringa upp på (max 7 dagar fram i tiden)<br>
+      10. Se till att dem är införstådda på 1–3 olika representanter hör av sig från olika bolag.
+    </div>
+  </div>
+
+  <!-- EXEMPEL ANTECKNING -->
+  <div id="exempel" class="section">
+    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <h1>Exempel anteckning</h1>
+    <div class="example">
+      Kontakta: 20/11, 14:00-16:00.<br>
+      Kommentar: Intresserad av batteri.<br><br>
+      Anders har installerat solceller för några år sedan och är överlag nöjd. Har inte installerat batteri i och med att han inte fått ihop det tidigare. Vi pratade om stödtjänster och effektavgifter vilket gjorde honom intresserad. Hade en del frågor om hur han skulle göra med ansökan om grönt avdrag och antalet fastighetsägare då han hade problem med det förra gången. Var kluven på om han behövde större än 15kWh, då han drar väldigt mycket el under vintern med en värmepump.<br><br>
+      Vill överlag se förslag på ett schysst batteri med bra avkastning. Var viktigt att kalkylen skulle se bra ut.<br><br>
+      Säkring: 20A<br>
+      Årlig produktion: 16.000kWh<br>
+      Installerad effekt: 18,5kWp<br>
+      Årlig förbrukning: 20.000kWh
+    </div>
+  </div>
+
+  <!-- BRA ATT VETA -->
+  <div id="bra" class="section">
+    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <h1>Bra att veta</h1>
+
+    <h2>Lutningar</h2>
+    <ul>
+      <li>Platt tak 0–15°</li>
+      <li>Lätt lutning 17–25°</li>
+      <li>Vanlig lutning 27–35°</li>
+      <li>Brant lutning 37–45°</li>
+    </ul>
+
+    <h2>Säkringar – Storlekar och färger</h2>
+    <ul>
+      <li>16A – Grå</li>
+      <li>20A – Blå</li>
+      <li>25A – Gul</li>
+      <li>35A – Svart</li>
+      <li>50A – Vit</li>
+      <li>63A – Koppar</li>
+    </ul>
+
+    <h2>Taktyper – Takåldrar</h2>
+    <ul>
+      <li>Plåttak – max 25 år</li>
+      <li>Betongtegel – max 50</li>
+      <li>Tegel – max 50</li>
+      <li>Eternit – Se till att kunden vet om att man behöver lägga en plåtskiva mellan eternittaket och solpanelerna, kan även öka kostnaden något.</li>
+      <li>Papp – Tveksam – Ok om kunden säger att insidan är stark och fräsch.</li>
+      <li>Finns även fler, utgå att max åldern är 20 på dem.</li>
+    </ul>
+
+    <h2>Förbrukning</h2>
+    <ul>
+      <li>För solceller – Minst 8.000 kWh</li>
+      <li>För batteri (kunden har redan solceller) – Minst 5.000 kWh</li>
+    </ul>
+
+    <h2>Fastighetsägare</h2>
+    <ul>
+      <li>1–2 fastighetsägare – Ok</li>
+      <li>Ekonomibyggnad – Upplys kunden om att de ej har tillgång till grönt avdrag</li>
+    </ul>
+  </div>
+
+  <!-- GÖR DETTA NÄR DU ÄR FÄRDIG -->
+  <div id="avsluta" class="section">
+    <button class="back-btn" onclick="back()">⬅ Till start</button>
+    <h1>Gör detta när du är färdig</h1>
+    <div class="checklist">
+      <ol>
+        <li>Kolla att du är satt som opener</li>
+        <li>Kolla att mötesdag är i formatet (exempel) 31/12 (inte ex. onsdag, inte år, bara datumet.)</li>
+        <li>Kolla att mötestid är i formatet (exempel) 15:00-17:00 (inga mellanrum, exakt i det formatet)</li>
+        <li>Kolla att anteckningen är tillbörlig, ha med det väsentliga</li>
+        <li>Kolla att du tagit alla förutsättningar och skrivit ned dem under anteckningen</li>
+        <li>Se till att adressen är rätt, har du inte dubbelkollat den, kolla upp personen på merinfo.se.<br><strong>OBS!</strong> Adressen måste vara adress, postnummer, ort</li>
+        <li>Se till att anteckningen följer strukturen som exemplet</li>
+      </ol>
+    </div>
+    <p><strong>Missar du några av dessa delar är det stor chans att det blir fel med leadet och att det diskas</strong></p>
+  </div>
+
+</div>
+
+<script>
+function show(id) {
+  document.getElementById('menu').style.display = 'none';
+  document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function back() {
+  document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
+  document.getElementById('menu').style.display = 'flex';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+
 </body>
 </html>
-```
