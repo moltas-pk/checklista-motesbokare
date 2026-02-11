@@ -1,29 +1,215 @@
+```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checklista mötesbokare</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
-    h2 { color: #1a3c5e; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 12px 0; font-size: 16px; }
-    input[type=checkbox] { transform: scale(1.5); margin-right: 10px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anteckningsmanual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #start {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #0056b3;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        h2:hover {
+            background: #dee2e6;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border-left: 4px solid #ddd;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.3);
+        }
+        .important {
+            color: #dc3545; /* Röd för viktigt */
+            font-weight: bold;
+        }
+        .info {
+            color: #007bff; /* Blå för info */
+        }
+        .checklist {
+            color: #28a745; /* Grön för checklista */
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ffeeba;
+            margin: 10px 0;
+        }
+        .example-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin: 15px 0;
+        }
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div id="start">
+            <div class="card" onclick="showSection('section1')">1️⃣ ❗ Info att ta</div>
+            <div class="card" onclick="showSection('section2')">2️⃣ Exempel Anteckning</div>
+            <div class="card" onclick="showSection('section3')">3️⃣ Bra att veta</div>
+            <div class="card" onclick="showSection('section4')">4️⃣ ❗ Gör detta när du avslutat samtalet</div>
+        </div>
 
-<h2>Checklista – varje samtal</h2>
+        <div id="section1" class="section">
+            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
+            <h1 class="important">❗ Info att ta</h1>
+            <h2 onclick="toggleContent(this)">Underhuvudrubrik 1 (exempel)</h2>
+            <div class="content">
+                <p>Info text här.</p>
+                <ul class="info">
+                    <li>Info punkt 1</li>
+                    <li>Info punkt 2</li>
+                </ul>
+            </div>
+            <!-- Lägg till fler underrubriker efter behov -->
+        </div>
 
-<ul>
-  <li><input type="checkbox"> Presentera dig & företaget</li>
-  <li><input type="checkbox"> Fånga intresse / hook</li>
-  <li><input type="checkbox"> Identifiera behov</li>
-  <li><input type="checkbox"> Pitcha möte (dag & tid)</li>
-  <li><input type="checkbox"> Hantera invändning</li>
-  <li><input type="checkbox"> Avsluta med nästa steg</li>
-</ul>
+        <div id="section2" class="section">
+            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
+            <h1>2️⃣ Exempel Anteckning</h1>
+            <div class="example-box">
+                <p>Exempeltext för anteckning här.</p>
+            </div>
+            <h2 onclick="toggleContent(this)">Exempel underrubrik</h2>
+            <div class="content">
+                <p>Mer detaljer.</p>
+            </div>
+        </div>
 
+        <div id="section3" class="section">
+            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
+            <h1>3️⃣ Bra att veta</h1>
+            <h2 onclick="toggleContent(this)">Bra info 1</h2>
+            <div class="content">
+                <ul>
+                    <li>Bra punkt</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="section4" class="section">
+            <button class="back-btn" onclick="backToStart()">⬅ Till start</button>
+            <h1 class="important">❗ Gör detta när du avslutat samtalet</h1>
+            <h2 onclick="toggleContent(this)">Checklista efter samtal</h2>
+            <div class="content">
+                <ul class="checklist">
+                    <li><input type="checkbox"> Steg 1</li>
+                    <li><input type="checkbox"> Steg 2</li>
+                </ul>
+                <div class="highlight important">Super viktigt: Kom ihåg detta!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.getElementById('start').style.display = 'none';
+            document.getElementById(id).style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToStart() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.style.display = 'none');
+            document.getElementById('start').style.display = 'grid';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleContent(header) {
+            const content = header.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
+```
